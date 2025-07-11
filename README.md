@@ -1,6 +1,6 @@
-## 📦 Project Title: EC2 Apache2 MySQL Web App Deployment
+## 📦 Project Title: Deploying PHP MySQL Web App on EC2 with Apache (EC2 LAMP Stack Deployment)
 
-Full project with an **EC2 instance**, **Apache2 server**, and **MySQL database** involves setting up a web server, a database, and a web application that interacts with the database.
+This project shows how to set up a simple web app on an EC2 Linux server using Apache2 and MySQL. It includes installing the server, database, and getting everything working together to run your PHP app.
 
 ## 📌 Step 1: Set Up an EC2 Instance
 
@@ -35,26 +35,43 @@ Full project with an **EC2 instance**, **Apache2 server**, and **MySQL database*
 1. **Update the System**
 
    ```bash
+   # for Amazon Linux
    sudo dnf update -y
    sudo dnf upgrade -y
    sudo passwd
+
+   # for Ubuntu Linux
+   sudo apt update
+   sudo apt upgrade -y
+   sudo -i passwd
    ```
 
 2. **Install PHP**
 
    ```bash
+   # for Amazon Linux
    sudo dnf install -y php-fpm php-mysqli php-json php-devel mariadb105-server
+
+   # for Ubuntu Linux
+   sudo apt install php libapache2-mod-php php-mysql -y
+   # or
+   sudo apt install -y php-fpm php-mysql php-json php-dev mariadb-server
    ```
 
 3. **Install Apache2**
 
    ```bash
+   # for Amazon Linux
    sudo dnf install httpd -y
+
+   # for Ubuntu Linux
+   sudo apt install apache2 -y
    ```
 
 4. **Start and Enable Services**
 
    ```bash
+   # for Amazon Linux
    sudo systemctl start httpd
    sudo systemctl enable httpd
    sudo systemctl status httpd
@@ -62,6 +79,15 @@ Full project with an **EC2 instance**, **Apache2 server**, and **MySQL database*
    sudo systemctl start mariadbmariadbmariadb
    sudo systemctl enable mariadbmariadb
    sudo systemctl status mariadb
+
+   # for Ubuntu Linux
+   sudo systemctl start apache2
+   sudo systemctl enable apache2
+   sudo systemctl status apache2
+
+   sudo systemctl start mysql
+   sudo systemctl enable mysql
+   sudo systemctl status mysql
    ```
 
 5. **Secure MySQL Installation**
@@ -367,7 +393,11 @@ Full project with an **EC2 instance**, **Apache2 server**, and **MySQL database*
 3. **Restart Apache**
 
    ```bash
+   # for Amazon Linux
    sudo systemctl restart httpd
+
+   # for Ubuntu Linux
+   sudo systemctl restart apache2
    ```
 
 4. **Test Application**
